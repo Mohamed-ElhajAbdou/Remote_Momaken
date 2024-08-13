@@ -97,8 +97,8 @@ app.use(bodyParser.json());
 
 
 app.use(cors({
-  // origin: ['http://localhost:5173', 'https://front-end-nine-gold.vercel.app','https://front-ok386q2lb-mohamed-elhaj-abdous-projects.vercel.app/','https://front-end-git-main-mohamed-elhaj-abdous-projects.vercel.app/','https://front-ok386q2lb-mohamed-elhaj-abdous-projects.vercel.app/'], // Allow requests from both the frontend
-  origin: "https://front-end-nine-gold.vercel.app", // Allow requests from these origins
+  origin: ['http://localhost:5173', 'https://front-end-nine-gold.vercel.app','https://front-ok386q2lb-mohamed-elhaj-abdous-projects.vercel.app/','https://front-end-git-main-mohamed-elhaj-abdous-projects.vercel.app/','https://front-ok386q2lb-mohamed-elhaj-abdous-projects.vercel.app/'], // Allow requests from both the frontend
+  // origin: "https://front-end-nine-gold.vercel.app", // Allow requests from these origins
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Specify allowed methods
   allowedHeaders: ['Content-Type', 'Authorization'], // Specify allowed headers
   credentials: true // Allow credentials (e.g., cookies, authorization headers)
