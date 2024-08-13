@@ -1,55 +1,145 @@
-const { sql } = require('../config/db');
-const bcrypt = require('bcrypt');
+// const { sql } = require('../config/db');
+// const bcrypt = require('bcrypt');
+
+// const signup = async (req, res) => {
+//   const { userName, email, password } = req.body;
+//   if (!userName || !email || !password) {
+//     return res.status(400).send({ error: 'Missing required fields' });
+//   }
+
+//   try {
+//     const hashedPassword = await bcrypt.hash(password, 10);
+//     const result = await new sql.Request()
+//       .input('UserName', sql.NVarChar, userName)
+//       .input('Email', sql.NVarChar, email)
+//       .input('PasswordHash', sql.NVarChar, hashedPassword)
+//       .query(`
+//         INSERT INTO Users (UserName, Email, PasswordHash) 
+//         OUTPUT inserted.UserID 
+//         VALUES (@UserName, @Email, @PasswordHash)
+//       `);
+
+//     res.status(201).send({ message: 'User created successfully', userId: result.recordset[0].UserID });
+//   } catch (err) {
+//     console.error('Error during signup:', err);
+//     res.status(500).send(err);
+//   }
+// };
+
+// const login = async (req, res) => {
+//   const { email, password } = req.body;
+//   if (!email || !password) {
+//     return res.status(400).send({ error: 'Missing required fields' });
+//   }
+
+//   try {
+//     const result = await new sql.Request()
+//       .input('Email', sql.NVarChar, email)
+//       .query('SELECT * FROM Users WHERE Email = @Email');
+
+//     const user = result.recordset[0];
+//     if (!user || !await bcrypt.compare(password, user.PasswordHash)) {
+//       return res.status(401).send({ error: 'Invalid email or password' });
+//     }
+
+//     res.send({ message: 'Login successful', userId: user.UserID });
+//   } catch (err) {
+//     console.error('Error during login:', err);
+//     res.status(500).send(err);
+//   }
+// };
+
+// module.exports = {
+//   signup,
+//   login
+// };
+
+
+
+// // controllers/authController.js
+// const { signupService, loginService } = require('../services/auth_services');
+
+// const signup = async (req, res) => {
+//   try {
+//     const { username, password } = req.body;
+
+//     if (!username || !password) {
+//       return res.status(400).json({ error: 'Username and password are required' });
+//     }
+
+//     const userExists = await signupService(username, password);
+//     if (userExists) {
+//       return res.status(409).json({ message: 'User already exists' });
+//     }
+
+//     res.status(201).json({ message: 'User registered successfully!' });
+//   } catch (err) {
+//     res.status(500).json({ error: 'Failed to register user', details: err.message });
+//   }
+// };
+
+// const login = async (req, res) => {
+//   try {
+//     const { username, password } = req.body;
+
+//     if (!username || !password) {
+//       return res.status(400).json({ error: 'Username and password are required' });
+//     }
+
+//     const user = await loginService(username, password);
+//     if (!user) {
+//       return res.status(401).json({ error: 'Invalid credentials' });
+//     }
+
+//     res.status(200).json({ message: 'Login successful!', user });
+//   } catch (err) {
+//     res.status(500).json({ error: 'Failed to login', details: err.message });
+//   }
+// };
+
+// module.exports = { signup, login };
+
+
+
+// controllers/authController.js
+const { signupService, loginService } = require('../services/auth_services');
 
 const signup = async (req, res) => {
-  const { userName, email, password } = req.body;
-  if (!userName || !email || !password) {
-    return res.status(400).send({ error: 'Missing required fields' });
-  }
-
   try {
-    const hashedPassword = await bcrypt.hash(password, 10);
-    const result = await new sql.Request()
-      .input('UserName', sql.NVarChar, userName)
-      .input('Email', sql.NVarChar, email)
-      .input('PasswordHash', sql.NVarChar, hashedPassword)
-      .query(`
-        INSERT INTO Users (UserName, Email, PasswordHash) 
-        OUTPUT inserted.UserID 
-        VALUES (@UserName, @Email, @PasswordHash)
-      `);
+    const { username, password } = req.body;
 
-    res.status(201).send({ message: 'User created successfully', userId: result.recordset[0].UserID });
+    if (!username || !password) {
+      return res.status(400).json({ error: 'Username and password are required' });
+    }
+
+    const userExists = await signupService(username, password);
+    if (userExists) {
+      return res.status(409).json({ message: 'User already exists' });
+    }
+
+    res.status(201).json({ message: 'User registered successfully!' });
   } catch (err) {
-    console.error('Error during signup:', err);
-    res.status(500).send(err);
+    res.status(500).json({ error: 'Failed to register user', details: err.message });
   }
 };
 
 const login = async (req, res) => {
-  const { email, password } = req.body;
-  if (!email || !password) {
-    return res.status(400).send({ error: 'Missing required fields' });
-  }
-
   try {
-    const result = await new sql.Request()
-      .input('Email', sql.NVarChar, email)
-      .query('SELECT * FROM Users WHERE Email = @Email');
+    const { username, password } = req.body;
 
-    const user = result.recordset[0];
-    if (!user || !await bcrypt.compare(password, user.PasswordHash)) {
-      return res.status(401).send({ error: 'Invalid email or password' });
+    if (!username || !password) {
+      return res.status(400).json({ error: 'Username and password are required' });
     }
 
-    res.send({ message: 'Login successful', userId: user.UserID });
+    const user = await loginService(username, password);
+    if (!user) {
+      return res.status(401).json({ error: 'Invalid credentials' });
+    }
+
+    res.status(200).json({ message: 'Login successful!', user });
   } catch (err) {
-    console.error('Error during login:', err);
-    res.status(500).send(err);
+    res.status(500).json({ error: 'Failed to login', details: err.message });
   }
 };
 
-module.exports = {
-  signup,
-  login
-};
+module.exports = { signup, login };
