@@ -1,7 +1,10 @@
+// routes/queryRoutes.js
 const express = require('express');
-const router = express.Router();
-const { executeCustomQuery } = require('../controllers/queryController');
+const { QueryDB } = require('../controllers/queryController');
 
-router.post('/Query_DB', executeCustomQuery);
+const router = express.Router();
+
+// Route to execute custom MongoDB queries
+router.post('/Query_DB', QueryDB);
 
 module.exports = router;

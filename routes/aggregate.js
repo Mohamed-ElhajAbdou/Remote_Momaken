@@ -1,7 +1,10 @@
+// routes/aggregateRoutes.js
 const express = require('express');
-const router = express.Router();
 const { getAggregates } = require('../controllers/aggregateController');
 
+const router = express.Router();
+
+// Route to calculate aggregates
 router.post('/aggregates', getAggregates);
 
 module.exports = router;

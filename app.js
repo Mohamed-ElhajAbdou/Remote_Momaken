@@ -79,9 +79,10 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors'); // Include CORS middleware
-const { connectDB } = require('./config/db');
+const { connectDB } = require('./config/mongoConfig');
 const queryRoutes = require('./routes/query');
-const authRoutes = require('./routes/auth');
+const authRoutes = require('./routes/authRoutes');
+const insertDataRoute = require('./routes/insertDataRoute');
 const aggregateRoutes = require('./routes/aggregate');
 
 const app = express();
@@ -103,6 +104,7 @@ connectDB();
 app.use('/api', queryRoutes);
 app.use('/api', authRoutes);
 app.use('/api', aggregateRoutes);
+app.use('/api', insertDataRoute);
 
 // Start the server
 const port = process.env.PORT || 5000;
