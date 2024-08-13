@@ -92,7 +92,7 @@ app.use(bodyParser.json());
 
 // Configure CORS to allow requests from your frontend
 app.use(cors({
-  origin: ['http://localhost:5173', 'https://social-media-ruby-phi.vercel.app'], // Allow requests from both the frontend
+  origin: ['http://localhost:5173', 'https://front-end-nine-gold.vercel.app/'], // Allow requests from both the frontend
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Specify allowed methods
   allowedHeaders: ['Content-Type', 'Authorization'], // Specify allowed headers
 }));
