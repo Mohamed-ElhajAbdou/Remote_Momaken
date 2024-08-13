@@ -93,7 +93,7 @@ app.use(bodyParser.json());
 // Configure CORS to allow requests from your frontend
 
 
-+1
+
 
 front-ok386q2lb-mohamed-elhaj-abdous-projects.vercel.app
 
@@ -102,6 +102,8 @@ app.use(cors({
   origin: "https://front-end-nine-gold.vercel.app", // Allow requests from these origins
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Specify allowed methods
   allowedHeaders: ['Content-Type', 'Authorization'], // Specify allowed headers
+  credentials: true // Allow credentials (e.g., cookies, authorization headers)
+
 }));
 
 // Connect to the database
