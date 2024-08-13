@@ -7,8 +7,7 @@
     "node": ">=18.0.0"
   },
   "scripts": {
-    "start": "node app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node app.js"
   },
   "keywords": [],
   "author": "",
@@ -20,8 +19,11 @@
     "danfojs-node": "^1.1.2",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
+    "firebase": "^10.12.5",
+    "mongodb": "^6.8.0",
     "mssql": "^11.0.1",
     "mysql": "^2.18.1",
-    "mysql2": "^3.11.0"
+    "mysql2": "^3.11.0",
+    "urlencode": "^2.0.0"
   }
 }

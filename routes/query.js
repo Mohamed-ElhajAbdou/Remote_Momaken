@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const { executeCustomQuery } = require('../controllers/queryController');
+const { executeCustomQuery } = require('../controllers/Mongo_queryController');
 
-router.post('/Query_DB', executeCustomQuery);
+router.post('/QueryDB_sql', executeCustomQuery);
 
 module.exports = router;
