@@ -49,7 +49,7 @@ const { queryDataService } = require('../services/query_services');
 
 const QueryDB = async (req, res) => {
   try {
-    const { collectionName, query, projection } = req.body; // Destructure the required fields
+    const { collectionName, query, projection,pipeline  } = req.body; // Destructure the required fields
 
     // Validate input
     if (!collectionName || typeof collectionName !== 'string') {
@@ -59,7 +59,9 @@ const QueryDB = async (req, res) => {
     const queryObject = {
       collectionName: collectionName,
       query: query || {}, // Default to an empty query if not provided
-      projection: projection || {} // Default to an empty projection if not provided
+      projection: projection || {}, // Default to an empty projection if not provided
+      pipeline: pipeline || [] // Default to an empty pipeline if not provided
+
     };
 
     const result = await queryDataService(queryObject);
