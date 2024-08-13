@@ -95,7 +95,6 @@ app.use(bodyParser.json());
 
 
 
-front-ok386q2lb-mohamed-elhaj-abdous-projects.vercel.app
 
 app.use(cors({
   // origin: ['http://localhost:5173', 'https://front-end-nine-gold.vercel.app','https://front-ok386q2lb-mohamed-elhaj-abdous-projects.vercel.app/','https://front-end-git-main-mohamed-elhaj-abdous-projects.vercel.app/','https://front-ok386q2lb-mohamed-elhaj-abdous-projects.vercel.app/'], // Allow requests from both the frontend
