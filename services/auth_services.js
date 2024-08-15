@@ -1,7 +1,9 @@
 // services/authService.js
 const { connectDB } = require('../config/mongoConfig');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
+const JWT_SECRET='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEyMzQ1Njc4OTAiLCJ1c2VybmFtZSI6ImpvaG5kb2UifQ.s3cr3tK3y'
 const signupService = async (username, password) => {
   const db = await connectDB();
   const collection = db.collection('users');
@@ -20,6 +22,7 @@ const signupService = async (username, password) => {
   return false;
 };
 
+
 const loginService = async (username, password) => {
   const db = await connectDB();
   const collection = db.collection('users');
@@ -35,8 +38,16 @@ const loginService = async (username, password) => {
   if (!match) {
     return null; // Passwords do not match
   }
+console.log(process.env.JWT_SECRET)
+  // Generate JWT token
+  const token = jwt.sign(
+    { id: user._id, username: user.username },
+    JWT_SECRET,
+    { expiresIn: '1h' } // Token expires in 1 hour
+  );
 
-  return user; // Login successful
+  return { user, token }; // Return user and token
 };
+
 
 module.exports = { signupService, loginService };
